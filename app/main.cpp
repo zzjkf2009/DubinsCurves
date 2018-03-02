@@ -1,37 +1,34 @@
 /**
- *@file main.cpp
- *@Copyright (C) 2017 Zejiang Zeng - All Rights Reserved
+ * @Author: Zejiang Zeng
+ * @Date:   2018-02-28T19:06:34-05:00
+ * @Email:  zzeng@terpmail.umd.edu
+ * @Filename: main.cpp
+ * @Last modified by:   Zejiang Zeng
+ * @Last modified time: 2018-03-02T18:14:53-05:00
+ * @Copyright: (C) 2017 Zejiang Zeng - All Rights Reserved
  * You may use, distribute and modify this code under the
- * terms of the MIT license, please visit :
- https://github.com/zzjkf2009/Midterm_Astar/blob/master/LICENSE
- *@brief This is the main source file that combine the Astar path palng project 
+ * terms of the BSD license.
  */
-#include <iostream>
-#include <array>
-#include <iostream>
-#include <opencv2/opencv.hpp>
-#include "Astar.hpp"
-#include "Map.hpp"
-#include"BuildingMap.hpp"
-#include "WeightedAstar.hpp"
-int main() {
-  Map setmap;
-  Map::gridMatrix map_info = setmap.getGridmap(3);
-  Astar::coordinate start = setmap.SetStart(2, 3);
-  Astar::coordinate goal = setmap.SetGoal(7, 7);
-  std::stack < Astar::coordinate > Path;
-  int weight = 2;
-  WeightedAstar w_astar;
-  Path = w_astar.WeightedA(map_info, start, goal, weight);
-  Buildingmap build;
-  cv::Mat Map = build.drawGrids(map_info, start, goal);
-  cv::Mat PathIm = build.drawPath(Path, Map);
-  if (!PathIm.data)                              // Check for invalid input
-  {
-    std::cout << "Could not open or find the image" << std::endl;
-    return -1;
-  }
-  imwrite("Image.jpg", PathIm);
-  return 0;
-}
 
+ #include "opencv2/opencv.hpp"
+ #include "grid_map_build.hpp"
+ #include "2D_Map_Build.hpp"
+ #include <iostream>
+int main()
+{
+        Map_Build map;
+        cv::Mat img = map.Create_the_Map();
+        cv::Point start_1 = cv::Point(30,100);
+        cv::Point goal_1 =  cv::Point(210,30);
+        gridMap gridmap(1.0,1.0,start_1,goal_1);
+        gridmap.img = img;
+        if(gridmap.Bredth_First_Search())
+                std::cout<<"Find the goal"<<std::endl;
+        else
+                std::cout<<"Goal not find"<<std::endl;
+        namedWindow( "Display window", WINDOW_AUTOSIZE);
+        imshow( "Display window", gridmap.img);
+        imwrite("Path.png", gridmap.img);
+        cv::waitKey(10000);
+        return 0;
+}
