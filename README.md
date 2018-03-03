@@ -51,8 +51,7 @@ cd build
 ## Result
 If there is a path, the path image and video will be generate in build directory, meanwhile the path will be printed on the screen. If the start or goal node is invalid, the exception message
 will be noticed.
-- obstacles:
-![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/2D.png)
+
 - Path PNG:
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/Path.png)
 - Path GIF:
