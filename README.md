@@ -6,15 +6,17 @@ This is an exercise project to design a path planning components using high-qual
 
 ## Pipeline
 - The workspace is defined as a 250-by-150 map and there are three obstacles, one rectangle, one circle, one polynomial. Those three obstacles are represent by Half-plane and semi-algebraic  models.
-- In simplify the problem, the grid map is reduced dimension from 2D to 1D vector of boolean, the number of total nodes is determined by the user defined resolution (x_resolution,y_resolution).  If the node is occupied (inside the obstacles), then it is marked as false, otherwise, it is true. I use the center of the node as a reference to calculate if the center is inside those Half-plane or semi-algebraic  models.
+- To simplify the problem, the grid map is reduced dimension from 2D to 1D vector of boolean, the number of total nodes is determined by the user defined resolution (x_resolution,y_resolution).  If the node is occupied (inside the obstacles), then it is marked as false, otherwise, it is true. I use the center of the node as a reference to calculate if the center is inside those Half-plane or semi-algebraic represented obstacle models.
 - After the grid map is created, a Breadth First Search is applied to find the path from start node to goal node.
-- The Cartesian map and path are drawn by OpenCV, and a video is create to demonstrate the path **IN REVERSE ORDER**, which is drawn from *goal node* back to *start node* !! And a .gif will be
+- The Cartesian map and path are drawn by OpenCV, and a video is create to demonstrate the path **IN REVERSE ORDER**, namely drawn from *goal node* back to *start node* !! And a .gif will be
 attached result section. (start and goal node will be checked to see if they are valid)
--Original Map:
+- Original Map:
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/2D_Map.png)
 
-**Note**
-The result of the search may vary depend on which neighbor among 8 neighbors is get searched first, my current first search node is the lower-left.
+## Note
+- The result of the search may vary depend on which neighbor among 8 neighbors is got searched first, my current first search node is the lower-left. {-1, 0, 1}
+- Both of the following parameters can be defined from the *main.cpp*
+(1) start and goal positions (2) x and y grid resolution
 
 ## Prerequisites
 * Ubuntu 16.04
@@ -25,36 +27,29 @@ The result of the search may vary depend on which neighbor among 8 neighbors is 
 
 Run as fellow:
 ```
-* git clone --recursive https://github.com/zzjkf2009/Breadth_First_Search
-* cd Bredth_First_Search
+ git clone --recursive https://github.com/zzjkf2009/Breadth_First_Search
+ cd Breadth_First_Search
 ```
 If OpenCV library is not cloned with the other file:
 ```
-* git clone https://github.com/opencv/opencv.git
+ git clone https://github.com/opencv/opencv.git
 ```
-And then
+And if build folder is not created then
 ```
-* mkdir build
-* cd build
-* cmake ..
-* make
+ mkdir build
 ```
-**Note**
-Both of the following parameters can be defined from the *main.cpp*
-- start and goal positions
-- x and y grid resolution
-
 
 ## Running and Demo
 Run:
 ```
 cd build
+cmake ..
+make
 ./app/shepp-app
 ```
 
 ## Result
-If there is a path, the path image and video will be generate in build directory, meanwhile the path will be printed on the screen. If the start or goal node is invalid, the exception message
-will be noticed.
+If there is a path, the path image and video will be generate in the *build* directory, meanwhile the path will be printed on the screen. If the start or goal node is invalid, the exception message will be noticed.
 
 - Path PNG:
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/Path.png)
