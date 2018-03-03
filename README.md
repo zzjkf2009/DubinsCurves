@@ -39,7 +39,11 @@ And then
 * cmake ..
 * make
 ```
-Start and goal positions can be defined from the *main.cpp*
+**Note**
+Both of the following parameters can be defined from the *main.cpp*
+- start and goal positions
+- x and y grid resolution
+
 
 ## Running and Demo
 Run:
