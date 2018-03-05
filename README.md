@@ -17,6 +17,8 @@ attached result section. (start and goal node will be checked to see if they are
 - The result of the search may vary depend on which neighbor among 8 neighbors is got searched first, my current first search node is the lower-left. {-1, 0, 1}
 - Both of the following parameters can be defined from the *main.cpp*
 (1) start and goal positions (2) x and y grid resolution
+- In the gridMap class, function *build_grid_map* generate the "NodesSet" and "NodesInfoSet.
+ function *Breadth_First_Search* implement Breadth First Search algorithm. Function *drawPathVideo* generate the graphical interface.
 
 ## Prerequisites
 * Ubuntu 16.04
