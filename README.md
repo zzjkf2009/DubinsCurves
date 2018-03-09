@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is an exercise project to design a path planning components using high-quality software engineering practices. This project used Breadth First Search graph search algorithm to find an feasible path from start node to goal node. the Cartesian map is given. After define the start and goal node, it will generate a path. Opencv library was used to draw the map and the path to provide a intuitive graph for user.
+This is an exercise project to design a path planning components using high-quality software engineering practices. This project used Breadth First Search graph search algorithm to find an feasible path from start node to goal node. the Cartesian map is given. After define the start and goal node, it will generate a path. OpenCV library was used to draw the map and the path to provide a intuitive graph for user.
 
 ## Pipeline
 - The workspace is defined as a 250-by-150 map and there are three obstacles, one rectangle, one circle, one polynomial. Those three obstacles are represent by Half-plane and semi-algebraic  models.
@@ -13,10 +13,13 @@ attached result section. (start and goal node will be checked to see if they are
 - Original Map:
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/2D_Map.png)
 
-## Note
-- The result of the search may vary depend on which neighbor among 8 neighbors is got searched first, my current first search node is the lower-left. {-1, 0, 1}
+## Note !!
+- BFS is a complete and optimality guarantee search algorithm that will find the optimal (shortest) path. However,in our case (regard to the given map figure 1) the result of the search may vary depend on which neighbor among 8 neighbors is got searched first, my current first search node is the lower-left and traverse counter clockwise. This sounds contradictory, why it guarantee to find the optimal path but those path could be different depend on the search order?
+That because all of them are optimal (shortest) path, although they are different, they take same number of steps to reach the goal.
+
 - Both of the following parameters can be defined from the *main.cpp*
-(1) start and goal positions (2) x and y grid resolution
+**(1) start and goal positions (2) x and y grid resolution**
+
 - In the gridMap class, function *build_grid_map* generate the "NodesSet" and "NodesInfoSet.
  function *Breadth_First_Search* implement Breadth First Search algorithm. Function *drawPathVideo* generate the graphical interface.
 
