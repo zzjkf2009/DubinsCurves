@@ -14,8 +14,7 @@ attached result section. (start and goal node will be checked to see if they are
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/2D_Map.png)
 
 ## Note !!
-- BFS is a complete and optimality guarantee search algorithm that will find the optimal (shortest) path. However,in our case (regard to the given map figure 1) the result of the search may vary depend on which neighbor among 8 neighbors is got searched first, my current first search node is the lower-left and traverse counter clockwise. This sounds contradictory, why it guarantee to find the optimal path but those path could be different depend on the search order?
-That because all of them are optimal (shortest) path, although they are different, they take same number of steps to reach the goal.
+- BFS is a complete and optimality guarantee search algorithm that will find the optimal (shortest) path. However,in our case (regard to the given map figure 1) the result of the search may vary depend on which neighbor among 8 neighbors is got searched first. This sounds contradictory, why it guarantee to find the optimal path but those path could be different depend on the search order? That because all of them are optimal (shortest) path, although they are different, they take same number of steps to reach the goal. My current search order is going horizontal/vertical first and then goes diagonally.
 
 - Both of the following parameters can be defined from the *main.cpp*
 **(1) start and goal positions (2) x and y grid resolution**

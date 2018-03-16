@@ -74,6 +74,7 @@ bool gridMap::Bredth_First_Search() {
         auto startNode = std::make_shared<Node>(start_node_num,num_y);
         openlist_.push(startNode);
         openset_.push_back(start_node_num);
+        std::vector<std::pair<int,int> > nears = {{-1,0},{1,0},{0,-1},{0,1},{-1,-1},{-1,1},{1,-1},{1,1}};
         while(!openlist_.empty()) {
                 std::shared_ptr<Node> FrontNode = openlist_.front();
                 /**    if(FrontNode->node_num == goal_node_num) {
@@ -84,29 +85,28 @@ bool gridMap::Bredth_First_Search() {
                 openlist_.pop();
                 openset_.pop_front();
                 closedset_.insert(FrontNode->node_num);
-                for(int i = -1; i < 2; i++) {
-                        for(int j = -1; j < 2; j++) {
-                                int new_x = FrontNode->x + i;
-                                int new_y = FrontNode->y + j;
-                                int new_node_num = new_x*num_y+new_y;
-                                if( new_x < 0 || new_x  > num_x || new_y <= 1 ||new_y > num_y || closedset_.find(new_node_num)!=closedset_.end() ||opensetfind(openset_,new_node_num) || !gridmap[new_node_num])
-                                        continue;
-                                else {
-                                        auto NeighborNode = std::make_shared<Node>(new_node_num,num_y);
-                                        NeighborNode->father = FrontNode;
-                                        std::cout<<"node "<< NeighborNode->x<<" "<< NeighborNode->y<<" 's father is"<< FrontNode->x <<" "<<FrontNode->y<<std::endl;
-                                        openlist_.push(NeighborNode);
-                                        openset_.push_back(new_node_num);
-                                        if(NeighborNode->node_num == goal_node_num) {
-                                                //  std::cout<<"Find the goal"<<std::endl;
-                                                drawPathVideo(NeighborNode);
-                                                return true;
-                                        }
-
+                //  for(int i = -1; i < 2; i++) {
+                //          for(int j = -1; j < 2; j++) {
+                for(auto & i : nears) {
+                        int new_x = FrontNode->x + i.first;
+                        int new_y = FrontNode->y + i.second;
+                        int new_node_num = new_x*num_y+new_y;
+                        if( new_x < 0 || new_x  > num_x || new_y <= 1 ||new_y > num_y || closedset_.find(new_node_num)!=closedset_.end() ||opensetfind(openset_,new_node_num) || !gridmap[new_node_num])
+                                continue;
+                        else {
+                                auto NeighborNode = std::make_shared<Node>(new_node_num,num_y);
+                                NeighborNode->father = FrontNode;
+                                //std::cout<<"node "<< NeighborNode->x<<" "<< NeighborNode->y<<" 's father is"<< FrontNode->x <<" "<<FrontNode->y<<std::endl;
+                                openlist_.push(NeighborNode);
+                                openset_.push_back(new_node_num);
+                                if(NeighborNode->node_num == goal_node_num) {
+                                        //  std::cout<<"Find the goal"<<std::endl;
+                                        drawPathVideo(NeighborNode);
+                                        return true;
                                 }
+
                         }
                 }
-
         }
         std::cout << "Not find" << '\n';
         return false;
@@ -120,8 +120,8 @@ void gridMap::drawPathVideo(std::shared_ptr<Node> Node) {
         int NumSteps = 0;
         while(Node->father != nullptr) {
                 try {
-                        cv::Point p1 = cv::Point((Node->x -1) * x_resolution_,(num_y - Node->y)*y_resolution_);
-                        cv::Point p2 = cv::Point( Node->x * x_resolution_,(num_y - Node->y-1)*y_resolution_);
+                        cv::Point p1 = cv::Point(Node->x * x_resolution_,(num_y - Node->y-1)*y_resolution_);
+                        cv::Point p2 = cv::Point( (Node->x+1) * x_resolution_,(num_y - Node->y-2)*y_resolution_);
                         cv::rectangle(img, p1, p2, cv::Scalar(0, 0, 0), -1, 8);
 
                         Node = Node->father;
