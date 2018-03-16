@@ -17,6 +17,7 @@
 #include <tgmath.h>
 #include <queue>
 #include <set>
+#include <list>
 #include <memory>
 #include "opencv2/opencv.hpp"
 
@@ -105,13 +106,14 @@ double x_resolution_;
 double y_resolution_;
 cv::Point center_ = cv::Point(180,120);
 std::queue<std::shared_ptr<Node> > openlist_;
-std::set<int> openset_;
+std::list<int> openset_;
 std::set<int> closedset_;
 /**
  * [Draw the path from goal node back to start node]
  * @param Node [std::shared_ptr<Node>]
  */
 void drawPathVideo(std::shared_ptr<Node> Node);
+bool opensetfind(std::list<int> values, int x);
 
 
 

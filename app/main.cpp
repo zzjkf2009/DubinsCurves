@@ -18,9 +18,9 @@ int main()
 {
         Map_Build map;
         cv::Mat img = map.Create_the_Map();
-        cv::Point start_1 = cv::Point(30,100);
-        cv::Point goal_1 =  cv::Point(210,30);
-        gridMap gridmap(1.0,1.0,start_1,goal_1);
+        cv::Point start_1 = cv::Point(30,50);
+        cv::Point goal_1 =  cv::Point(34,50);
+        gridMap gridmap(1,1,start_1,goal_1);
         gridmap.img = img;
         if(gridmap.Bredth_First_Search())
                 std::cout<<"Find the goal"<<std::endl;
