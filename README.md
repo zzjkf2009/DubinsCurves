@@ -40,9 +40,8 @@ make
 ```
 
 - Path PNG:
-![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/Path.png)
-- Path GIF:
-![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/Path.gif)
+![](https://github.com/zzjkf2009/DubinsCurves/blob/master/result/R_10_r_5.png)
+
 
 
 
