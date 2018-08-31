@@ -1,26 +1,13 @@
 # Cartesian_space_Breadth First Search
 
 ## Overview
-
-This is an exercise project to design a path planning components using high-quality software engineering practices. This project used Breadth First Search graph search algorithm to find an feasible path from start node to goal node. the Cartesian map is given. After define the start and goal node, it will generate a path. OpenCV library was used to draw the map and the path to provide a intuitive graph for user.
+This is the Dubinscurves base class that will find the proper Dubins curve based on the initial and goal pose (location and direction). The proper path will be drawn with OpenCV by a derived class DrawDubins. It also can be further used for providing essential info for mobile robots
 
 ## Pipeline
-- The workspace is defined as a 250-by-150 map and there are three obstacles, one rectangle, one circle, one polynomial. Those three obstacles are represent by Half-plane and semi-algebraic  models.
-- To simplify the problem, the grid map is reduced dimension from 2D to 1D vector of boolean, the number of total nodes is determined by the user defined resolution (x_resolution,y_resolution).  If the node is occupied (inside the obstacles), then it is marked as false, otherwise, it is true. I use the center of the node as a reference to calculate if the center is inside those Half-plane or semi-algebraic represented obstacle models.
-- After the grid map is created, a Breadth First Search is applied to find the path from start node to goal node.
-- The Cartesian map and path are drawn by OpenCV, and a video is create to demonstrate the path **IN REVERSE ORDER**, namely drawn from *goal node* back to *start node* !! And a .gif will be
-attached result section. (start and goal node will be checked to see if they are valid)
-- Original Map:
-![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/2D_Map.png)
-
-## Note !!
-- BFS is a complete and optimality guarantee search algorithm that will find the optimal (shortest) path. However,in our case (regard to the given map figure 1) the result of the search may vary depend on which neighbor among 8 neighbors is got searched first. This sounds contradictory, why it guarantee to find the optimal path but those path could be different depend on the search order? That because all of them are optimal (shortest) path, although they are different, they take same number of steps to reach the goal. My current search order is going horizontal/vertical first and then goes diagonally.
-
-- Both of the following parameters can be defined from the *main.cpp*
-**(1) start and goal positions (2) x and y grid resolution**
-
-- In the gridMap class, function *build_grid_map* generate the "NodesSet" and "NodesInfoSet.
- function *Breadth_First_Search* implement Breadth First Search algorithm. Function *drawPathVideo* generate the graphical interface.
+* Initial and Goal Pose
+* Calculate the two circles (CW,CCW) for each pose
+* Calculate the feasible path for each pair of circles.
+* find shortest path among the paths
 
 ## Prerequisites
 * Ubuntu 16.04
@@ -31,10 +18,10 @@ attached result section. (start and goal node will be checked to see if they are
 
 Run as fellow:
 ```
- git clone --recursive https://github.com/zzjkf2009/Breadth_First_Search
- cd Breadth_First_Search
+ git clone --recursive https://github.com/zzjkf2009/DubinsCurves
+ cd DubinsCurves
 ```
-If OpenCV library is not cloned with the other file:
+The repository includes the OpenCV library already and not need to download again. If OpenCV library is not included somehow:
 ```
  git clone https://github.com/opencv/opencv.git
 ```
@@ -52,22 +39,12 @@ make
 ./app/shepp-app
 ```
 
-## Result
-If there is a path, the path image and video will be generate in the *build* directory, meanwhile the path will be printed on the screen. If the start or goal node is invalid, the exception message will be noticed.
-
 - Path PNG:
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/Path.png)
 - Path GIF:
 ![](https://github.com/zzjkf2009/Breadth_First_Search/blob/master/result/Path.gif)
 
 
-
-## Test
-After the build process, run the unit test program, you will see the result of all tests
-run:
-```
-./build/test/cpp-test
-```
 
 ## Library
 * OpenCV
@@ -77,3 +54,7 @@ It is a library of many inbuilt functions mainly aimed at real time image proces
 Google Test is a unit testing library for the C++ programming language, based on the xUnit architecture. More details cna be find at: https://github.com/google/googletest
 * Gmock
 Google Mock is an extension to Google Test for writing and using C++ mock classes. See the separate Google Mock documentation at https://github.com/google/googletest/blob/master/googlemock/README.md
+
+Reference:
+- http://home.deib.polimi.it/gini/robot/docs/Rob10bis.pdf
+- http://www.xml-data.org/JSJYY/2017-7-2114.htm

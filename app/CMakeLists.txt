@@ -1,4 +1,4 @@
-add_executable(shell-app main.cpp 2D_Map_Build.cpp grid_map_build.cpp)
+add_executable(shell-app main.cpp Dubinscurves.cpp DrawDubinsCurve.cpp)
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
     ${OpenCV_INCLUDE_DIRS}

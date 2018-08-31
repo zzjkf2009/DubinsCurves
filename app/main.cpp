@@ -10,25 +10,18 @@
  * terms of the BSD license.
  */
 
+ #include "Dubinscurves.h"
+ #include "DrawDubinsCurve.h"
  #include "opencv2/opencv.hpp"
- #include "grid_map_build.hpp"
- #include "2D_Map_Build.hpp"
- #include <iostream>
-int main()
-{
-        Map_Build map;
-        cv::Mat img = map.Create_the_Map();
-        cv::Point start_1 = cv::Point(30,80);
-        cv::Point goal_1 =  cv::Point(200,50);
-        gridMap gridmap(1,1,start_1,goal_1);
-        gridmap.img = img;
-        if(gridmap.Bredth_First_Search())
-                std::cout<<"Find the goal"<<std::endl;
-        else
-                std::cout<<"Goal not find"<<std::endl;
-        namedWindow( "Display window", WINDOW_AUTOSIZE);
-        imshow( "Display window", gridmap.img);
-        imwrite("Path.png", gridmap.img);
+ #define PI 3.14159265
+
+int main () {
+        cv::Mat img(100,100,CV_8UC3,cv::Scalar(255,255,255));
+        int Radius = 10;
+        int r = 5;
+        DrawDubinsCurve drawdubins(img,30.22,70.6,PI/4,70.0,30.0,PI/2,Radius,r);
+        cv::namedWindow( "Display window", cv::WINDOW_AUTOSIZE);
+        cv::imshow( "Display window",img);
         cv::waitKey(10000);
         return 0;
 }

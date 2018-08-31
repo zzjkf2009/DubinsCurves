@@ -3,8 +3,6 @@ set(GTEST_SHUFFLE 1)
 add_executable(
     cpp-test
     main.cpp
-    gridMapTest.cpp
-    ../app/grid_map_build.cpp
 )
 include_directories(
     ${CMAKE_SOURCE_DIR}/include
